@@ -1,6 +1,7 @@
-<h1>
- <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>![progressio logo](https://github.com/matiasgimenezdev/progressio/assets/117539520/759b860a-c5af-4c9b-aff9-b32e9d74a685)
-Progressio</h1>
+![grid](https://github.com/matiasgimenezdev/progressio/assets/117539520/90965943-02c5-42ec-8e1a-00f9304b2bf6)<h1>
+ <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+Progressio
+</h1>
 
 <p> Progressio is crafted to empower you in organizing, visualizing, and managing your tasks efficiently through the widely acclaimed Kanban methodology. It enables you to streamline your workflow, fostering productivity and enhancing collaboration.</p>
 
