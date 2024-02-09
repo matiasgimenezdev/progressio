@@ -18,23 +18,29 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 	return (
 		<aside
 			className={`absolute h-[calc(100%-80px)] ${
-				isOpen ? 'w-[200px]' : 'w-[40px]'
+				isOpen
+					? 'w-[250px] animate-openmenu'
+					: 'w-[40px] animate-closemenu'
 			} bg-primary-color left-0 top-[80px] text-white`}
 		>
 			<nav className={`w-full ${isOpen ? 'text-right' : 'text-center'} `}>
 				<button
-					className={`mt-4 mr-1 cursor-pointer ${
+					className={`h-10 w-10 mt-4 cursor-pointer ${
 						isOpen && 'rotate-180 mr-3'
-					}`}
+					} `}
 					onClick={() => setIsOpen(!isOpen)}
 				>
-					<CaretDoubleRight size={14} weight='bold' />
+					<CaretDoubleRight
+						size={14}
+						weight='bold'
+						className='ml-auto mr-auto'
+					/>
 				</button>
 				<ul
-					className={`transition-all mt-4 ${
+					className={`transition-transform mt-2 ${
 						isOpen
-							? 'block translate-x-0  w-[200px] opacity-1'
-							: 'hidden opacity-0 -translate-x-[500px] '
+							? 'w-[230px] opacity-1 animate-openmenuitems'
+							: 'w-0 opacity-0 animate-closemenuitems'
 					}`}
 				>
 					{boards.map((board) => {
@@ -44,10 +50,17 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 								className={`text-left mt-1 h-[60px] flex items-center gap-2 pl-1.5 ${
 									currentBoardId === id
 										? 'bg-secondary-color rounded-r-full'
-										: 'hover:opacity-70 hover:bg-secondary-color rounded-r-full cursor-pointer '
-								}`}
+										: 'hover:opacity-80 hover:bg-secondary-color rounded-r-full cursor-pointer'
+								} ${!isOpen && 'hidden'}`}
 								key={id}
-								onClick={() => handleBoardSelect(board)}
+								onClick={() =>
+									isOpen && handleBoardSelect(board)
+								}
+								onKeyDown={(event) =>
+									event.key === 'Enter' &&
+									handleBoardSelect(board)
+								}
+								tabIndex={0}
 							>
 								<Cube size={22} weight='light' />
 								{name}
