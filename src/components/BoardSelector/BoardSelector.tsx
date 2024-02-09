@@ -28,7 +28,7 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 					}`}
 					onClick={() => setIsOpen(!isOpen)}
 				>
-					<CaretDoubleRight size={18} weight='bold' />
+					<CaretDoubleRight size={14} weight='bold' />
 				</button>
 				<ul
 					className={`transition-all mt-4 ${
