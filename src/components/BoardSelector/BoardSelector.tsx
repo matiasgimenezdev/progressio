@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { Board } from '../../types';
-import { CaretDoubleRight, Cube } from '@phosphor-icons/react';
+import { CaretDoubleRight, Cube, SignOut } from '@phosphor-icons/react';
 
 type BoardSelectorProps = {
 	boards: Board[];
@@ -23,10 +23,14 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 					: 'w-[40px] animate-closemenu'
 			} bg-primary-color left-0 top-[80px] text-white`}
 		>
-			<nav className={`w-full ${isOpen ? 'text-right' : 'text-center'} `}>
+			<nav
+				className={`w-full h-full relative ${
+					isOpen ? 'text-right' : 'text-center'
+				} `}
+			>
 				<button
 					className={`h-10 w-10 mt-4 cursor-pointer ${
-						isOpen && 'rotate-180 mr-3'
+						isOpen && 'rotate-180 mr-3 right-0'
 					} `}
 					onClick={() => setIsOpen(!isOpen)}
 				>
@@ -37,7 +41,7 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 					/>
 				</button>
 				<ul
-					className={`transition-transform mt-2 ${
+					className={`transition-transform mt-2 h-auto ${
 						isOpen
 							? 'w-[230px] opacity-1 animate-openmenuitems'
 							: 'w-0 opacity-0 animate-closemenuitems'
@@ -67,6 +71,19 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 							</li>
 						);
 					})}
+					<li
+						className={`absolute bottom-8 left-4 group ${
+							!isOpen && 'hidden'
+						}`}
+					>
+						<button className=''>
+							Logout{' '}
+							<SignOut
+								size={28}
+								className='inline-block ml-1 relative bottom-0.5 group-hover:fill-red-600'
+							/>
+						</button>
+					</li>
 				</ul>
 			</nav>
 		</aside>
