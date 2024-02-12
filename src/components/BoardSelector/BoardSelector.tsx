@@ -15,6 +15,11 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
+	function handleBoardItemClick(board: Board) {
+		handleBoardSelect(board);
+		setIsOpen(false);
+	}
+
 	return (
 		<aside
 			className={`absolute h-[calc(100%-80px)] ${
@@ -57,12 +62,10 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 										: 'hover:opacity-80 hover:bg-secondary-color rounded-r-full cursor-pointer'
 								} ${!isOpen && 'hidden'}`}
 								key={id}
-								onClick={() =>
-									isOpen && handleBoardSelect(board)
-								}
+								onClick={() => handleBoardItemClick(board)}
 								onKeyDown={(event) =>
 									event.key === 'Enter' &&
-									handleBoardSelect(board)
+									handleBoardItemClick(board)
 								}
 								tabIndex={0}
 							>
