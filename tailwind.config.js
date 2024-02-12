@@ -9,10 +9,10 @@ export default {
 				'secondary-color': 'var(--secondary-color)',
 			},
 			animation: {
-				openmenu: 'openmenu .35s ease-out',
-				closemenu: 'closemenu .35s ease-out',
-				openmenuitems: 'openmenuitems .5s ease-out',
-				closemenuitems: 'closemenuitems .5s ease-out',
+				openmenu: 'openmenu .35s linear',
+				closemenu: 'closemenu .35s linear',
+				openmenuitems: 'openmenuitems .2s linear',
+				closemenuitems: 'closemenuitems .1s linear',
 				opacity: 'opacity .6s ease-in',
 			},
 			keyframes: {
@@ -26,11 +26,11 @@ export default {
 				},
 				openmenuitems: {
 					'0%': { opacity: 0, width: '100px' },
-					'100%': { opacity: 1, width: '190px' },
+					'100%': { opacity: 1, width: '230px' },
 				},
 				closemenuitems: {
-					'0%': { opacity: 1, width: '190px' },
-					'50%': { opacity: 0, width: '100px' },
+					'0%': { opacity: 0.5, width: '230px' },
+					'50%': { opacity: 0 },
 					'100%': { width: '0px' },
 				},
 				opacity: {
