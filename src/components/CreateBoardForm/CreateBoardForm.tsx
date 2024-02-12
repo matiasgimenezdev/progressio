@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
 import { getUUID } from '../../utils';
 import { Board } from '../../types';
-import { Modal } from '..';
+import { Form, Modal } from '..';
 import { useKeydown } from '../../hooks';
+import { X } from '@phosphor-icons/react';
 
 type CreateBoardFormProps = {
 	showModal: boolean;
@@ -36,10 +37,7 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 
 	return (
 		<Modal isOpen={showModal}>
-			<form
-				onSubmit={handleSubmit}
-				className='flex flex-col gap-2 bg-primary-color p-5 text-white rounded-lg sm:p-8 sm:w-80 sm:h-75'
-			>
+			<Form handleSubmit={handleSubmit}>
 				<h3 className='text-lg font-bold py-2'>Create board</h3>
 				<label htmlFor='board-name'>Name</label>
 				<input
@@ -57,12 +55,12 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 					value='Create board'
 				/>
 				<button
-					className='font-medium mt-0.5 bg-red-700 py-2 rounded-md hover:brightness-90'
+					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-4'
 					onClick={() => closeModal()}
 				>
-					Close
+					<X size={16} weight='bold' />
 				</button>
-			</form>
+			</Form>
 		</Modal>
 	);
 };
