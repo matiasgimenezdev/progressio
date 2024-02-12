@@ -13,6 +13,7 @@ export default {
 				closemenu: 'closemenu .35s ease-out',
 				openmenuitems: 'openmenuitems .5s ease-out',
 				closemenuitems: 'closemenuitems .5s ease-out',
+				opacity: 'opacity .6s ease-in',
 			},
 			keyframes: {
 				openmenu: {
@@ -25,12 +26,16 @@ export default {
 				},
 				openmenuitems: {
 					'0%': { opacity: 0, width: '100px' },
-					'100%': { opacity: 1, width: '230px' },
+					'100%': { opacity: 1, width: '190px' },
 				},
 				closemenuitems: {
-					'0%': { opacity: 1, width: '230px' },
+					'0%': { opacity: 1, width: '190px' },
 					'50%': { opacity: 0, width: '100px' },
 					'100%': { width: '0px' },
+				},
+				opacity: {
+					'0%': { opacity: 0 },
+					'100%': { opacity: 1 },
 				},
 			},
 		},

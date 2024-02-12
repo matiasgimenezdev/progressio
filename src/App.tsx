@@ -20,6 +20,11 @@ function App() {
 		setCurrentBoard(board);
 	}
 
+	function handleCreateBoard(newBoard: BoardType) {
+		const nextBoards = [...userBoards, newBoard];
+		setUserBoards(nextBoards);
+	}
+
 	return (
 		<>
 			<Header boardName={currentBoard.name} />
@@ -28,6 +33,7 @@ function App() {
 				boards={userBoards}
 				currentBoardId={currentBoard.id}
 				handleBoardSelect={handleBoardSelect}
+				handleCreateBoard={handleCreateBoard}
 			/>
 		</>
 	);
