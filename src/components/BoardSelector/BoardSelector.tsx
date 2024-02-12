@@ -6,7 +6,7 @@ import { useKeydown } from '../../hooks';
 
 type BoardSelectorProps = {
 	boards: Board[];
-	currentBoardId: string;
+	currentBoardId: string | undefined;
 	handleBoardSelect: (board: Board) => void;
 	handleCreateBoard: (board: Board) => void;
 };
@@ -67,28 +67,36 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 								: 'w-0 opacity-0 animate-closemenuitems'
 						}`}
 					>
-						{boards.map((board) => {
-							const { name, id } = board;
-							return (
-								<li
-									className={`text-left w-[190px] mt-2 h-[60px] flex items-center gap-2 pl-1.5 ${
-										currentBoardId === id
-											? 'bg-secondary-color rounded-r-full'
-											: 'hover:opacity-80 hover:bg-secondary-color rounded-r-full cursor-pointer'
-									} ${!isOpen && 'hidden'}`}
-									key={id}
-									onClick={() => handleBoardItemClick(board)}
-									onKeyDown={(event) =>
-										event.key === 'Enter' &&
-										handleBoardItemClick(board)
-									}
-									tabIndex={0}
-								>
-									<Cube size={22} weight='light' />
-									{name}
-								</li>
-							);
-						})}
+						{boards.length > 0 ? (
+							boards.map((board) => {
+								const { name, id } = board;
+								return (
+									<li
+										className={`text-left w-[190px] mt-2 h-[60px] flex items-center gap-2 pl-1.5 ${
+											currentBoardId === id
+												? 'bg-secondary-color rounded-r-full'
+												: 'hover:opacity-80 hover:bg-secondary-color rounded-r-full cursor-pointer'
+										} ${!isOpen && 'hidden'}`}
+										key={id}
+										onClick={() =>
+											handleBoardItemClick(board)
+										}
+										onKeyDown={(event) =>
+											event.key === 'Enter' &&
+											handleBoardItemClick(board)
+										}
+										tabIndex={0}
+									>
+										<Cube size={22} weight='light' />
+										{name}
+									</li>
+								);
+							})
+						) : (
+							<li className='text-center font-medium'>
+								No boards yet
+							</li>
+						)}
 					</ul>
 					<button
 						className={`text-center ml-auto mr-auto block text-sm font-medium rounded-lg bg-secondary-color p-2 px-6 pr-5 mt-6 w-fit ${

@@ -14,7 +14,9 @@ function App() {
 		},
 	]);
 
-	const [currentBoard, setCurrentBoard] = useState<BoardType>(userBoards[0]);
+	const [currentBoard, setCurrentBoard] = useState<BoardType | undefined>(
+		userBoards[0] ?? undefined
+	);
 
 	function handleBoardSelect(board: BoardType) {
 		setCurrentBoard(board);
@@ -25,13 +27,24 @@ function App() {
 		setUserBoards(nextBoards);
 	}
 
+	function handleDeleteBoard() {
+		const nextBoards = userBoards.filter(
+			(board) => currentBoard?.id !== board.id
+		);
+		setCurrentBoard(nextBoards[0]);
+		setUserBoards(nextBoards);
+	}
+
 	return (
 		<>
-			<Header boardName={currentBoard.name} />
+			<Header
+				boardName={currentBoard?.name}
+				handleDeleteBoard={handleDeleteBoard}
+			/>
 			<Board />
 			<BoardSelector
 				boards={userBoards}
-				currentBoardId={currentBoard.id}
+				currentBoardId={currentBoard?.id}
 				handleBoardSelect={handleBoardSelect}
 				handleCreateBoard={handleCreateBoard}
 			/>
