@@ -32,6 +32,7 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 		};
 		handleCreateBoard(newBoard);
 		handleBoardItemClick(newBoard);
+		setBoardName('');
 		closeModal();
 	}
 
