@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from 'react';
 import { Board } from '../../types';
 import { CaretDoubleRight, Cube, SignOut, Plus } from '@phosphor-icons/react';
 import { CreateBoardForm } from '../CreateBoardForm/CreateBoardForm';
-import { useKeydown } from '../../hooks/useKeydown';
+import { useKeydown } from '../../hooks';
 
 type BoardSelectorProps = {
 	boards: Board[];

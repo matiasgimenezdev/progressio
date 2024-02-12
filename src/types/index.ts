@@ -1,3 +1,2 @@
-import { BoardType as Board } from './Board';
-
-export type { Board };
+export type { Board } from './Board';
+// export type { Task } from './Task';

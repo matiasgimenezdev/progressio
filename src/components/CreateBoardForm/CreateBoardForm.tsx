@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { getUUID } from '../../utils';
 import { Board } from '../../types';
 import { Modal } from '..';
-import { useKeydown } from '../../hooks/useKeydown';
+import { useKeydown } from '../../hooks';
 
 type CreateBoardFormProps = {
 	showModal: boolean;

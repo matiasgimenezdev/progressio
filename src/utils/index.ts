@@ -1,2 +1,1 @@
-import { getUUID } from "./getUUID";
-export {getUUID}
+export { getUUID } from './getUUID';

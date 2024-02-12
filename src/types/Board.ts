@@ -1,6 +1,6 @@
-import { Task } from './Task';
+// import { Task } from './Task';
 
-export type BoardType = {
+export type Board = {
 	id: string;
 	name: string;
 	// tasks: Task[];
