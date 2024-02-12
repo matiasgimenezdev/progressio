@@ -15,9 +15,9 @@ export const Header: FunctionComponent<HeaderProps> = ({ boardName }) => {
 				/>
 				<span className='pl-2 hidden sm:inline-block'>Progressio</span>
 			</h1>
-			<p className='inline-block w-full font-medium text-lg text-center'>
+			<h2 className='inline-block w-full font-medium text-lg text-center'>
 				{boardName}
-			</p>
+			</h2>
 		</header>
 	);
 };
