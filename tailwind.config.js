@@ -13,7 +13,7 @@ export default {
 				closemenu: 'closemenu .3s linear',
 				openmenuitems: 'openmenuitems .65s linear',
 				closemenuitems: 'closemenuitems .1s linear',
-				opacity: 'opacity .4s linear',
+				opacity: 'opacity .35s linear',
 			},
 			keyframes: {
 				openmenu: {
