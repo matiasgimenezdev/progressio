@@ -9,11 +9,11 @@ export default {
 				'secondary-color': 'var(--secondary-color)',
 			},
 			animation: {
-				openmenu: 'openmenu .35s linear',
-				closemenu: 'closemenu .35s linear',
-				openmenuitems: 'openmenuitems .2s linear',
+				openmenu: 'openmenu .3s linear',
+				closemenu: 'closemenu .3s linear',
+				openmenuitems: 'openmenuitems .65s linear',
 				closemenuitems: 'closemenuitems .1s linear',
-				opacity: 'opacity .6s ease-in',
+				opacity: 'opacity .4s linear',
 			},
 			keyframes: {
 				openmenu: {
@@ -35,6 +35,7 @@ export default {
 				},
 				opacity: {
 					'0%': { opacity: 0 },
+					'99%': { opacity: 0 },
 					'100%': { opacity: 1 },
 				},
 			},
