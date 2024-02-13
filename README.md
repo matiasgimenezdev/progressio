@@ -13,11 +13,3 @@ Progressio
 -   Build tool - [Vite](https://vitejs.dev/)
 
 #### Demo: [Progressio](https://matiasgimenez.vercel.app/)
-
-## Backlog
-
--   [ ] Users should be able to organize tasks into customizable column.
--   [ ] Users should be able to create, edit, and prioritize tasks.
--   [ ] Users should be able to move tasks between columns to reflect their current status or priority.
--   [ ] Users should be able to add labels to each task.
--   [ ] Users should be able to find tasks using filters or search functionality, making it effortless to locate specific items within the board.
