@@ -68,9 +68,9 @@ const COLORS = [
 	'#CD853F', // Peru
 	'#D2691E', // Chocolate
 	'#FF6347', // Tomato
-	'#FF4500', // OrangeRed
 	'#FF7F50', // Coral
 	'#FFA07A', // LightSalmon
 	'#FFDAB9', // PeachPuff
+	'#808080', // Gray
 	'#FFFFFF', // White
 ];
