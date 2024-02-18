@@ -23,6 +23,29 @@ function App() {
 						},
 					],
 				},
+				{
+					id: '2',
+					title: 'Column 2',
+					color: 'blue',
+					tasks: [
+						{
+							id: '1',
+							title: 'Task 1',
+							description: 'Description 1',
+							status: 'done',
+							assignee: 'User 1',
+							createdAt: '2021-01-01',
+						},
+						{
+							id: '2',
+							title: 'Task 2',
+							description: 'Description 2',
+							status: 'done',
+							assignee: 'User 1',
+							createdAt: '2021-01-01',
+						},
+					],
+				},
 			],
 		},
 		{

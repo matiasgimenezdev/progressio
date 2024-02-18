@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Board } from '../../types';
+import { DashboardColumn } from './DashboardColumn';
 
 type DashboardProps = {
 	currentBoard: Board | undefined;
@@ -9,8 +10,10 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 	currentBoard,
 }) => {
 	return (
-		<main className=' w-full h-[calc(100%-80px)] bg-background-color'>
-			{currentBoard && JSON.stringify(currentBoard)}
+		<main className='flex gap-16 w-fit ml-[40px] h-full p-8 pt-[100px] bg-background-color text-white'>
+			{currentBoard?.columns.map((column) => {
+				return <DashboardColumn key={column.id} column={column} />;
+			})}
 		</main>
 	);
 };
