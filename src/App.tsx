@@ -89,11 +89,15 @@ function App() {
 				boardName={currentBoard?.name}
 				handleDeleteBoard={handleDeleteBoard}
 			/>
-			{currentBoard && (
+			{currentBoard ? (
 				<Dashboard
 					currentBoard={currentBoard}
 					handleUpdateBoard={handleUpdateBoard}
 				/>
+			) : (
+				<p className='w-full text-lg font-bold text-white text-center absolute top-[100px]'>
+					No board selected.
+				</p>
 			)}
 			<BoardSelector
 				boards={userBoards}
