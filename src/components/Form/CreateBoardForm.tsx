@@ -45,6 +45,7 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 				<input
 					type='text'
 					id='board-name'
+					name='board-name'
 					maxLength={15}
 					value={boardName}
 					className='bg-transparent border border-white rounded-md p-2 focus:outline-none focus-within:border-2'

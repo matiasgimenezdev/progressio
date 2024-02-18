@@ -44,6 +44,7 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 				<label htmlFor='column-title'>Title</label>
 				<input
 					type='text'
+					name='column-title'
 					id='column-title'
 					maxLength={15}
 					value={title}
@@ -54,6 +55,7 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 				/>
 				<input
 					type='hidden'
+					name='column-color'
 					id='column-color'
 					value={color}
 					className='bg-transparent border border-white rounded-md p-2 focus:outline-none focus-within:border-2'
