@@ -1,7 +1,7 @@
-// import { Task } from './Task';
+import { Column } from './Column';
 
 export type Board = {
 	id: string;
 	name: string;
-	// tasks: Task[];
+	columns: Column[];
 };
