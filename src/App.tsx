@@ -1,28 +1,46 @@
 import { useState } from 'react';
-import { Board, Header, BoardSelector } from './components';
-import { Board as BoardType } from './types';
+import { Dashboard, Header, BoardSelector } from './components';
+import { Board } from './types';
 
 function App() {
-	const [userBoards, setUserBoards] = useState<BoardType[]>([
+	const [userBoards, setUserBoards] = useState<Board[]>([
 		{
 			id: '1',
 			name: 'Board 1',
+			columns: [
+				{
+					id: '1',
+					title: 'Column 1',
+					color: 'blue',
+					tasks: [
+						{
+							id: '1',
+							title: 'Task 1',
+							description: 'Description 1',
+							status: 'done',
+							assignee: 'User 1',
+							createdAt: '2021-01-01',
+						},
+					],
+				},
+			],
 		},
 		{
 			id: '2',
 			name: 'Board 2',
+			columns: [],
 		},
 	]);
 
-	const [currentBoard, setCurrentBoard] = useState<BoardType | undefined>(
+	const [currentBoard, setCurrentBoard] = useState<Board | undefined>(
 		userBoards[0] ?? undefined
 	);
 
-	function handleBoardSelect(board: BoardType) {
+	function handleBoardSelect(board: Board) {
 		setCurrentBoard(board);
 	}
 
-	function handleCreateBoard(newBoard: BoardType) {
+	function handleCreateBoard(newBoard: Board) {
 		const nextBoards = [...userBoards, newBoard];
 		setUserBoards(nextBoards);
 	}
@@ -41,7 +59,7 @@ function App() {
 				boardName={currentBoard?.name}
 				handleDeleteBoard={handleDeleteBoard}
 			/>
-			<Board />
+			<Dashboard currentBoard={currentBoard} />
 			<BoardSelector
 				boards={userBoards}
 				currentBoardId={currentBoard?.id}
