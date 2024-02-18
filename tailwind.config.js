@@ -13,7 +13,7 @@ export default {
 				closemenu: 'closemenu .3s linear',
 				openmenuitems: 'openmenuitems .65s linear',
 				closemenuitems: 'closemenuitems .1s linear',
-				opacity: 'opacity .35s linear',
+				opacity: 'opacity .55s linear',
 			},
 			keyframes: {
 				openmenu: {
@@ -35,7 +35,6 @@ export default {
 				},
 				opacity: {
 					'0%': { opacity: 0 },
-					'99%': { opacity: 0 },
 					'100%': { opacity: 1 },
 				},
 			},

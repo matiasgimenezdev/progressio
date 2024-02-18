@@ -99,8 +99,8 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 						)}
 					</ul>
 					<button
-						className={`text-center min-w-[160px] ml-auto mr-auto block text-sm font-medium rounded-lg bg-secondary-color p-2 px-6 pr-5 mt-6 w-fit ${
-							!isOpen && 'hidden'
+						className={`text-center min-w-[160px] opacity-1 ml-auto mr-auto block text-sm font-medium rounded-lg bg-secondary-color p-2 px-6 pr-5 mt-6 w-fit ${
+							!isOpen && 'hidden opacity-0'
 						} hover:brightness-90 group animate-opacity`}
 						onClick={() => {
 							setShowModal(true);
