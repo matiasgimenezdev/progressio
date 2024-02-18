@@ -11,7 +11,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
 	handleDeleteBoard,
 }) => {
 	return (
-		<header className='flex items-center bg-primary-color min-h-[80px] text-white w-full fixed'>
+		<header className='z-50 flex items-center bg-primary-color min-h-[80px] text-white w-full fixed'>
 			<h1 className='w-fit pl-4 inline-flex items-center text-[28px]'>
 				<img
 					className='inline-block w-8 h-8'
