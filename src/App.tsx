@@ -11,13 +11,12 @@ function App() {
 				{
 					id: '1',
 					title: 'Column 1',
-					color: 'blue',
+					color: '#4404ac',
 					tasks: [
 						{
 							id: '1',
 							title: 'Task 1',
 							description: 'Description 1',
-							status: 'done',
 							assignee: 'User 1',
 							createdAt: '2021-01-01',
 						},
@@ -26,13 +25,12 @@ function App() {
 				{
 					id: '2',
 					title: 'Column 2',
-					color: 'blue',
+					color: '#f72585',
 					tasks: [
 						{
 							id: '1',
 							title: 'Task 1',
 							description: 'Description 1',
-							status: 'done',
 							assignee: 'User 1',
 							createdAt: '2021-01-01',
 						},
@@ -40,7 +38,6 @@ function App() {
 							id: '2',
 							title: 'Task 2',
 							description: 'Description 2',
-							status: 'done',
 							assignee: 'User 1',
 							createdAt: '2021-01-01',
 						},
