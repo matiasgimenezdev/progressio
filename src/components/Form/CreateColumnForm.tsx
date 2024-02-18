@@ -4,6 +4,7 @@ import { Column } from '../../types';
 import { Form, Modal } from '..';
 import { useKeydown } from '../../hooks';
 import { X } from '@phosphor-icons/react';
+import { ColorPicker } from './ColorPicker/ColorPicker';
 
 type CreateColumnFormProps = {
 	showModal: boolean;
@@ -49,15 +50,16 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 					className='bg-transparent border border-white rounded-md p-2 focus:outline-none focus-within:border-2'
 					onChange={(event) => setTitle(event.target.value)}
 					autoComplete='off'
+					required
 				/>
-				<label htmlFor='column-color'>Color</label>
 				<input
-					type='color'
+					type='hidden'
 					id='column-color'
 					value={color}
 					className='bg-transparent border border-white rounded-md p-2 focus:outline-none focus-within:border-2'
 					onChange={(event) => setColor(event.target.value)}
 				/>
+				<ColorPicker setColor={setColor} color={color} />
 				<input
 					type='submit'
 					className='font-medium mt-4 bg-secondary-color py-2 rounded-md cursor-pointer hover:brightness-90'
