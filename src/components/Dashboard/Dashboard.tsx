@@ -35,7 +35,7 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 					);
 				})}
 			<button
-				className={`mt-3 h-fit bg-secondary-color rounded-lg text-sm p-3 px-5 cursor-pointer hover:brightness-90`}
+				className={`mt-3 min-w-[132px] h-fit bg-secondary-color rounded-lg text-sm p-3 px-5 cursor-pointer hover:brightness-90`}
 			>
 				+ Add column
 			</button>
