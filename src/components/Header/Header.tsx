@@ -14,8 +14,8 @@ export const Header: FunctionComponent<HeaderProps> = ({
 	const [showConfirmationMenu, setShowConfirmationMenu] =
 		useState<boolean>(false);
 	return (
-		<header className='flex items-center bg-primary-color min-h-[80px] text-white'>
-			<h1 className='w-fit pl-4 inline-flex items-center text-[28px]  '>
+		<header className='flex items-center bg-primary-color min-h-[80px] text-white w-full fixed'>
+			<h1 className='w-fit pl-4 inline-flex items-center text-[28px]'>
 				<img
 					className='inline-block w-8 h-8'
 					src='icons/grid.svg'
