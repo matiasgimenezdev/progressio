@@ -37,7 +37,7 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 		<RemoveScroll enabled={isOpen}>
 			<FocusLock disabled={!isOpen}>
 				<aside
-					className={`absolute h-[calc(100%-80px)] ${
+					className={`fixed h-[calc(100%-80px)] ${
 						isOpen
 							? 'w-[250px] max-w-[250px]'
 							: 'w-[40px] max-w-[40px]'
