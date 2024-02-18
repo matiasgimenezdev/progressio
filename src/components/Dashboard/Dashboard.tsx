@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import { Board, Column } from '../../types';
 import { DashboardColumn } from './DashboardColumn';
-import { CreateColumnForm } from '../CreateColumnForm/CreateColumnForm';
+import { CreateColumnForm } from '../Form/CreateColumnForm';
 
 type DashboardProps = {
 	currentBoard: Board;

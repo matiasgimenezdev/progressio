@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import { Board } from '../../types';
 import { useKeydown } from '../../hooks';
-import { CreateBoardForm } from '../CreateBoardForm/CreateBoardForm';
+import { CreateBoardForm } from '../Form/CreateBoardForm';
 import { CaretDoubleRight, Cube, SignOut, Plus } from '@phosphor-icons/react';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
