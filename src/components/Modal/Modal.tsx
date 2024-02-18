@@ -17,7 +17,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
 
 	return (
 		<div
-			className={` absolute top-[80px] left-0 flex h-[calc(100%-80px)] w-[calc(100%+40px)] items-center justify-center ${
+			className={`absolute top-[80px] left-[55px] sm:left-0 sm:top-[20px] flex min-h-[calc(100vh+80px)] min-w-[100vw] items-center justify-center ${
 				isOpen ? 'flex' : 'hidden'
 			} bg-black bg-opacity-70 transition-all duration-500`}
 		>
