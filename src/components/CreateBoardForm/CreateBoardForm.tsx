@@ -29,6 +29,7 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 			name:
 				boardName.trim().toLowerCase()[0].toUpperCase() +
 				boardName.trim().slice(1),
+			columns: [],
 		};
 		handleCreateBoard(newBoard);
 		handleBoardItemClick(newBoard);
