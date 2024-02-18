@@ -32,6 +32,7 @@ function App() {
 							title: 'Task 1',
 							description: 'Description 1',
 							assignee: 'User 1',
+							labels: ['Label 1', 'Label 2'],
 							createdAt: '2021-01-01',
 						},
 						{

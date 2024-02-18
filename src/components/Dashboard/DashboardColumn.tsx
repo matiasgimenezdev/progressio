@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import { Column } from '../../types/';
 import { X, CaretDown } from '@phosphor-icons/react';
-import { DashboardTask } from './DashboardTasks';
+import { DashboardTask } from './DashboardTask';
 
 type DashboardColumnProps = {
 	column: Column;
