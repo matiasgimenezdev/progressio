@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import FocusLock from 'react-focus-lock';
 
@@ -11,17 +11,21 @@ export const Modal: FunctionComponent<ModalProps> = ({
 	isOpen = false,
 	children,
 }) => {
+	useEffect(() => {
+		if (isOpen) window.scrollTo(0, 0);
+	}, [isOpen]);
+
 	return (
-		<RemoveScroll enabled={isOpen}>
-			<FocusLock disabled={!isOpen}>
-				<div
-					className={`z-[500] absolute top-[450px] right-0.5 flex h-[calc(100%-80px)] w-[calc(100%-45px)] items-center justify-center ${
-						isOpen ? 'flex' : 'hidden'
-					}`}
-				>
-					{children}
-				</div>
-			</FocusLock>
-		</RemoveScroll>
+		<div
+			className={`z-[500] absolute top-[80px] left-0 flex h-[calc(100%-80px)] w-full items-center justify-center ${
+				isOpen ? 'flex' : 'hidden'
+			}`}
+		>
+			<div>
+				<RemoveScroll enabled={isOpen}>
+					<FocusLock disabled={!isOpen}>{children}</FocusLock>
+				</RemoveScroll>
+			</div>
+		</div>
 	);
 };

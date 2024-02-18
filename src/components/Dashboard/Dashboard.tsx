@@ -1,6 +1,7 @@
-import { FunctionComponent } from 'react';
-import { Board } from '../../types';
+import { FunctionComponent, useState } from 'react';
+import { Board, Column } from '../../types';
 import { DashboardColumn } from './DashboardColumn';
+import { CreateColumnForm } from '../CreateColumnForm/CreateColumnForm';
 
 type DashboardProps = {
 	currentBoard: Board;
@@ -11,6 +12,8 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 	currentBoard,
 	handleUpdateBoard,
 }) => {
+	const [showModal, setShowModal] = useState(false);
+
 	function handleRemoveColumn(columnId: string) {
 		const nextColumns = currentBoard?.columns.filter(
 			(column) => column.id !== columnId
@@ -19,6 +22,15 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 		handleUpdateBoard({
 			...currentBoard,
 			columns: nextColumns ?? [],
+		});
+	}
+
+	function handleAddColumn(column: Column) {
+		const nextColumns = [...currentBoard.columns, column];
+
+		handleUpdateBoard({
+			...currentBoard,
+			columns: nextColumns,
 		});
 	}
 
@@ -36,9 +48,16 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 				})}
 			<button
 				className={`mt-3 min-w-[132px] h-fit bg-secondary-color rounded-lg text-sm p-3 px-5 cursor-pointer hover:brightness-90`}
+				onClick={() => setShowModal(!showModal)}
 			>
 				+ Add column
 			</button>
+
+			<CreateColumnForm
+				showModal={showModal}
+				closeModal={() => setShowModal(false)}
+				handleAddColumn={handleAddColumn}
+			/>
 		</main>
 	);
 };
