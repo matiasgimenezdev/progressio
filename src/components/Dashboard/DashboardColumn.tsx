@@ -5,14 +5,16 @@ import { DashboardTask } from './DashboardTasks';
 
 type DashboardColumnProps = {
 	column: Column;
+	handleRemoveColumn: (columnId: string) => void;
 };
 
 export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 	column,
+	handleRemoveColumn,
 }) => {
 	const [isMinimized, setIsMinimized] = useState<boolean>(false);
 
-	const { tasks, title, color } = column;
+	const { id, tasks, title, color } = column;
 	return (
 		<section className='min-w-[300px] flex gap-4 flex-col'>
 			<header
@@ -32,7 +34,10 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 				<h3 style={{ color: color }} className='font-bold text-lg'>
 					{title.toUpperCase()}
 				</h3>
-				<button className='absolute right-3 top-3'>
+				<button
+					className='absolute right-3 top-3'
+					onClick={() => handleRemoveColumn(id)}
+				>
 					<X size={18} weight='bold' />
 				</button>
 			</header>

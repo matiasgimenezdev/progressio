@@ -73,16 +73,30 @@ function App() {
 		setUserBoards(nextBoards);
 	}
 
+	function handleUpdateBoard(board: Board) {
+		const nextBoards = userBoards.map((b) =>
+			b.id === board.id ? board : b
+		);
+
+		setUserBoards(nextBoards);
+		setCurrentBoard(board);
+	}
+
 	return (
 		<>
 			<Header
 				boardName={currentBoard?.name}
 				handleDeleteBoard={handleDeleteBoard}
 			/>
-			<Dashboard currentBoard={currentBoard} />
+			{currentBoard && (
+				<Dashboard
+					currentBoard={currentBoard}
+					handleUpdateBoard={handleUpdateBoard}
+				/>
+			)}
 			<BoardSelector
 				boards={userBoards}
-				currentBoardId={currentBoard?.id}
+				currentBoardId={currentBoard?.id ?? undefined}
 				handleBoardSelect={handleBoardSelect}
 				handleCreateBoard={handleCreateBoard}
 			/>
