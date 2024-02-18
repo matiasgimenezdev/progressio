@@ -35,7 +35,7 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 	}
 
 	return (
-		<main className='flex gap-8 min-w-fit w-full pl-[60px] min-h-full h-auto p-8 pt-[85px] bg-background-color text-white'>
+		<main className='flex flex-col sm:flex-row gap-8 min-w-fit w-full pl-[60px] min-h-full h-auto p-8 pt-[85px] bg-background-color text-white'>
 			{currentBoard.columns &&
 				currentBoard.columns.map((column) => {
 					return (
