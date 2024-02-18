@@ -9,21 +9,12 @@ export default {
 				'secondary-color': 'var(--secondary-color)',
 			},
 			animation: {
-				openmenu: 'openmenu .3s linear',
-				closemenu: 'closemenu .3s linear',
-				openmenuitems: 'openmenuitems .65s linear',
-				closemenuitems: 'closemenuitems .1s linear',
-				opacity: 'opacity .55s linear',
+				openmenuitems:
+					'openmenuitems .55s cubic-bezier(0.4, 0, 0.2, 1)',
+				closemenuitems:
+					'closemenuitems .1s cubic-bezier(0.4, 0, 0.2, 1)',
 			},
 			keyframes: {
-				openmenu: {
-					'0%': { width: '40px' },
-					'100%': { width: '250px' },
-				},
-				closemenu: {
-					'0%': { width: '250px' },
-					'100%': { width: '40px' },
-				},
 				openmenuitems: {
 					'0%': { opacity: 0, width: '100px' },
 					'100%': { opacity: 1, width: '230px' },
@@ -32,10 +23,6 @@ export default {
 					'0%': { opacity: 0.5, width: '230px' },
 					'50%': { opacity: 0 },
 					'100%': { width: '0px' },
-				},
-				opacity: {
-					'0%': { opacity: 0 },
-					'100%': { opacity: 1 },
 				},
 			},
 		},
