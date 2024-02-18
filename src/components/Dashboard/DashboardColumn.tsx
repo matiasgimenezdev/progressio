@@ -1,5 +1,6 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Column } from '../../types/';
+import { X, CaretDown } from '@phosphor-icons/react';
 
 type DashboardColumnProps = {
 	column: Column;
@@ -8,23 +9,45 @@ type DashboardColumnProps = {
 export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 	column,
 }) => {
-	const { tasks, title, color = 'white' } = column;
+	const [isMinimized, setIsMinimized] = useState<boolean>(false);
+
+	const { tasks, title, color } = column;
 	return (
-		<section className='min-w-[250px]'>
-			<header className='py-2 w-full px-1 font-bold'>
-				<h3>{title}</h3>
+		<section className='min-w-[300px] flex gap-4 flex-col'>
+			<header
+				className={`p-2 w-full border-2 rounded-lg mt-2 relative`}
+				style={{ borderColor: color }}
+			>
+				<button
+					className='absolute right-10 top-3'
+					onClick={() => setIsMinimized(!isMinimized)}
+				>
+					<CaretDown
+						size={18}
+						className={!isMinimized ? 'rotate-180' : 'rotate-0'}
+					/>
+				</button>
+				<h3 style={{ color: color }} className='font-bold text-lg'>
+					{title.toUpperCase()}
+				</h3>
+				<button className='absolute right-3 top-3'>
+					<X size={18} />
+				</button>
 			</header>
-			{tasks.map((task) => {
-				const { id, title } = task;
-				return (
-					<article
-						className={`p-4 border-2 border-${color} min-h-[100px] rounded-lg`}
-						key={id}
-					>
-						{title}
-					</article>
-				);
-			})}
+			{!isMinimized &&
+				tasks.map((task) => {
+					const { id, title, description } = task;
+					return (
+						<article
+							className={`p-4 border-2 min-h-[130px] rounded-lg`}
+							key={id}
+							style={{ borderColor: color }}
+						>
+							<h4 className='font-bold'>{title}</h4>
+							<p className='text-sm py-2'>{description}</p>
+						</article>
+					);
+				})}
 		</section>
 	);
 };
