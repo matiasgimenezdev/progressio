@@ -122,8 +122,9 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 							/>
 						</button>
 						<button
-							className={`absolute bottom-8 left-4 group ${
-								!isOpen && 'hidden'
+							className={`absolute bottom-8 left-4 group transition-opacity duration-300 delay-150 ${
+								!isOpen &&
+								'translate-x-[-100%] text-transparent bg-transparent opacity-0'
 							}`}
 						>
 							Logout{' '}
