@@ -95,8 +95,8 @@ function App() {
 					handleUpdateBoard={handleUpdateBoard}
 				/>
 			) : (
-				<p className='w-full text-lg font-bold text-white text-center absolute top-[100px]'>
-					No board selected.
+				<p className='w-full mt-48 pl-6 text-lg font-bold text-white text-center absolute top-[100px] lg:text-3xl'>
+					No board selected
 				</p>
 			)}
 			<BoardSelector
