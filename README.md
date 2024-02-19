@@ -12,4 +12,4 @@ Progressio
 -   Estilos - [TailwindCSS 3.3.1](https://tailwindcss.com/docs/installation)
 -   Build tool - [Vite](https://vitejs.dev/)
 
-#### Demo: [Progressio](https://matiasgimenez.vercel.app/)
+#### [Demo:](https://matiasgimenez.vercel.app/)
