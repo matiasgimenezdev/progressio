@@ -38,7 +38,7 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 	}
 
 	return (
-		<Modal isOpen={showModal}>
+		<Modal isOpen={showModal} closeModal={closeModal}>
 			<Form handleSubmit={handleSubmit}>
 				<h3 className='text-lg font-bold py-2'>Add column</h3>
 				<label htmlFor='column-title'>Title</label>
@@ -68,7 +68,7 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 					value='Add column'
 				/>
 				<button
-					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-4'
+					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-0'
 					onClick={() => closeModal()}
 				>
 					<X size={16} weight='bold' />

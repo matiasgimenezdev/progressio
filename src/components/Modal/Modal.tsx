@@ -1,14 +1,33 @@
 import { FunctionComponent, useEffect } from 'react';
+import Modal from 'react-modal';
 import { RemoveScroll } from 'react-remove-scroll';
-import FocusLock from 'react-focus-lock';
 
 type ModalProps = {
 	isOpen: boolean;
+	closeModal: () => void;
 	children: React.ReactNode;
 };
 
-export const Modal: FunctionComponent<ModalProps> = ({
+const customStyles = {
+	content: {
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		border: 'none',
+		bordeRadius: '20px',
+		transform: 'translate(-50%, -50%)',
+		backgroundColor: '#0d1117',
+	},
+	overlay: {
+		backgroundColor: 'rgba(0, 0, 0, 0.788)',
+	},
+};
+
+export const CustomModal: FunctionComponent<ModalProps> = ({
 	isOpen = false,
+	closeModal,
 	children,
 }) => {
 	useEffect(() => {
@@ -16,16 +35,8 @@ export const Modal: FunctionComponent<ModalProps> = ({
 	}, [isOpen]);
 
 	return (
-		<div
-			className={`absolute top-[80px] left-[55px] sm:left-0 sm:top-[20px] flex min-h-[calc(100vh+80px)] min-w-[100vw] items-center justify-center ${
-				isOpen ? 'flex' : 'hidden'
-			} bg-black bg-opacity-70 transition-all duration-500`}
-		>
-			<div>
-				<RemoveScroll enabled={isOpen}>
-					<FocusLock disabled={!isOpen}>{children}</FocusLock>
-				</RemoveScroll>
-			</div>
-		</div>
+		<Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
+			<RemoveScroll>{children}</RemoveScroll>
+		</Modal>
 	);
 };
