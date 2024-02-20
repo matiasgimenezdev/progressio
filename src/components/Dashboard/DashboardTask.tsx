@@ -45,10 +45,14 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 				<DotsSixVertical size={18} weight='bold' />
 			</button>
 			<button
-				className='absolute bottom-4 right-4'
+				className='absolute bottom-4 right-4 group'
 				onClick={() => handleDeleteTask(id)}
 			>
-				<TrashSimple size={18} weight='bold' />
+				<TrashSimple
+					size={18}
+					weight='bold'
+					className='group-hover:text-red-500'
+				/>
 			</button>
 		</article>
 	);
