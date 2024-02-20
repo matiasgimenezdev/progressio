@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { Board } from '../../types';
-import { useKeydown } from '../../hooks';
+import { useKeydown, useModal } from '../../hooks';
 import { CreateBoardForm } from '../Form/CreateBoardForm';
 import { CaretDoubleRight, Cube, SignOut, Plus } from '@phosphor-icons/react';
 import FocusLock from 'react-focus-lock';
@@ -20,17 +20,15 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 	handleCreateBoard,
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [showModal, setShowModal] = useState<boolean>(false);
+
+	const [isModalOpen, showModal, closeModal] = useModal();
+
 	useKeydown('Escape', () => setIsOpen(false));
 
 	function handleBoardItemClick(board: Board) {
 		if (board.id === currentBoardId) return;
 		handleBoardSelect(board);
 		setIsOpen(false);
-	}
-
-	function closeModal() {
-		setShowModal(false);
 	}
 
 	return (
@@ -54,7 +52,7 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 							} `}
 							onClick={() => {
 								setIsOpen(!isOpen);
-								setShowModal(false);
+								closeModal();
 							}}
 						>
 							<CaretDoubleRight
@@ -110,7 +108,7 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 								'translate-x-[-100%] text-transparent bg-transparent opacity-0'
 							} block text-sm font-medium rounded-lg hover:brightness-90`}
 							onClick={() => {
-								setShowModal(true);
+								showModal();
 								setIsOpen(false);
 							}}
 						>
@@ -136,7 +134,7 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 					</nav>
 				</aside>
 				<CreateBoardForm
-					showModal={showModal}
+					showModal={isModalOpen}
 					closeModal={closeModal}
 					handleBoardItemClick={handleBoardItemClick}
 					handleCreateBoard={handleCreateBoard}
