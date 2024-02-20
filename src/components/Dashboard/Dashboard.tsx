@@ -35,6 +35,17 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 		});
 	}
 
+	function handleUpdateColumn(column: Column) {
+		const nextColumns = currentBoard.columns.map((c) =>
+			c.id === column.id ? column : c
+		);
+
+		handleUpdateBoard({
+			...currentBoard,
+			columns: nextColumns,
+		});
+	}
+
 	return (
 		<main className='flex flex-col md:flex-row gap-8 min-w-fit w-full pl-[60px] min-h-full h-auto p-8 pt-[85px] bg-background-color text-white'>
 			{currentBoard.columns &&
@@ -44,6 +55,7 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 							key={column.id}
 							column={column}
 							handleRemoveColumn={handleRemoveColumn}
+							handleUpdateColumn={handleUpdateColumn}
 						/>
 					);
 				})}

@@ -1,6 +1,9 @@
 import { FunctionComponent, useEffect } from 'react';
 import Modal from 'react-modal';
 import { RemoveScroll } from 'react-remove-scroll';
+import { useKeydown } from '../../hooks';
+
+Modal.setAppElement('#root');
 
 type ModalProps = {
 	isOpen: boolean;
@@ -30,6 +33,8 @@ export const CustomModal: FunctionComponent<ModalProps> = ({
 	closeModal,
 	children,
 }) => {
+	useKeydown('Escape', () => closeModal());
+
 	useEffect(() => {
 		if (isOpen) window.scrollTo(0, 0);
 	}, [isOpen]);

@@ -3,6 +3,5 @@ export type Task = {
 	title: string;
 	labels?: string[];
 	description: string;
-	assignee: string;
 	createdAt: string;
 };

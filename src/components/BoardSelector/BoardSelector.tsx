@@ -20,7 +20,6 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 	handleCreateBoard,
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-
 	const [isModalOpen, showModal, closeModal] = useModal();
 
 	useKeydown('Escape', () => setIsOpen(false));

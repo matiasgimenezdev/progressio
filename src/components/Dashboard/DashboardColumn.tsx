@@ -1,18 +1,44 @@
 import { FunctionComponent, useState } from 'react';
-import { Column } from '../../types/';
-import { X, CaretDown } from '@phosphor-icons/react';
+import { Column, Task } from '../../types/';
+import { X, CaretDown, Plus } from '@phosphor-icons/react';
 import { DashboardTask } from './DashboardTask';
+import { useModal } from '../../hooks';
+import { CreateTaskForm } from '../Form/CreateTaskForm';
 
 type DashboardColumnProps = {
 	column: Column;
 	handleRemoveColumn: (columnId: string) => void;
+	handleUpdateColumn: (column: Column) => void;
 };
 
 export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 	column,
 	handleRemoveColumn,
+	handleUpdateColumn,
 }) => {
 	const [isMinimized, setIsMinimized] = useState<boolean>(false);
+	const [isModalOpen, showModal, closeModal] = useModal();
+
+	function handleCreateTask(task: Task) {
+		const nextTasks = [...column.tasks, task];
+		const nextColumn = { ...column, tasks: nextTasks };
+		handleUpdateColumn(nextColumn);
+		closeModal();
+	}
+
+	// function handleDeleteTask(taskId: string) {
+	// 	const nextTasks = column.tasks.filter((task) => task.id !== taskId);
+	// 	const nextColumn = { ...column, tasks: nextTasks };
+	// 	handleUpdateColumn(nextColumn);
+	// }
+
+	// function handleUpdateTask(task: Task) {
+	// 	const nextTasks = column.tasks.map((t) =>
+	// 		t.id === task.id ? task : t
+	// 	);
+	// 	const nextColumn = { ...column, tasks: nextTasks };
+	// 	handleUpdateColumn(nextColumn);
+	// }
 
 	const { id, tasks, title, color } = column;
 	return (
@@ -51,6 +77,19 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 						/>
 					);
 				})}
+			<button
+				className='w-full bg-secondary-color p-2 rounded-lg cursor-pointer hover:brightness-90 flex justify-center items-center gap-2 text-sm'
+				onClick={() => showModal()}
+			>
+				Create task{' '}
+				<Plus size={16} weight='bold' className='inline-block' />
+			</button>
+			<CreateTaskForm
+				showModal={isModalOpen}
+				closeModal={closeModal}
+				handleCreateTask={handleCreateTask}
+				handleUpdateTask={() => {}}
+			/>
 		</section>
 	);
 };
