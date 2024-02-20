@@ -21,6 +21,10 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 	const [boardName, setBoardName] = useState<string>('');
 	useKeydown('Escape', closeModal);
 
+	function resetForm() {
+		setBoardName('');
+	}
+
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		if (boardName.trim() === '') return;
@@ -33,7 +37,7 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 		};
 		handleCreateBoard(newBoard);
 		handleBoardItemClick(newBoard);
-		setBoardName('');
+		resetForm();
 		closeModal();
 	}
 
@@ -41,7 +45,9 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 		<Modal isOpen={showModal} closeModal={closeModal}>
 			<Form handleSubmit={handleSubmit}>
 				<h3 className='text-lg font-bold py-2'>Create board</h3>
-				<label htmlFor='board-name'>Name</label>
+				<label htmlFor='board-name' className='text-sm'>
+					Name
+				</label>
 				<input
 					type='text'
 					id='board-name'
@@ -59,7 +65,10 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 				/>
 				<button
 					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-0'
-					onClick={() => closeModal()}
+					onClick={() => {
+						closeModal();
+						resetForm();
+					}}
 				>
 					<X size={16} weight='bold' />
 				</button>

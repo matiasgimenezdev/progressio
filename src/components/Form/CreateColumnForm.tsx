@@ -2,7 +2,6 @@ import React, { FunctionComponent, useState } from 'react';
 import { getUUID } from '../../utils';
 import { Column } from '../../types';
 import { Form, Modal } from '..';
-import { useKeydown } from '../../hooks';
 import { X } from '@phosphor-icons/react';
 import { ColorPicker } from './ColorPicker/ColorPicker';
 
@@ -20,7 +19,10 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 	const [title, setTitle] = useState<string>('');
 	const [color, setColor] = useState<string>('#FFFFFF');
 
-	useKeydown('Escape', closeModal);
+	function resetForm() {
+		setTitle('');
+		setColor('#FFFFFF');
+	}
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -31,9 +33,9 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 			color,
 			tasks: [],
 		};
+
 		handleAddColumn(newColumn);
-		setTitle('');
-		setColor('#FFFFFF');
+		resetForm();
 		closeModal();
 	}
 
@@ -41,7 +43,9 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 		<Modal isOpen={showModal} closeModal={closeModal}>
 			<Form handleSubmit={handleSubmit}>
 				<h3 className='text-lg font-bold py-2'>Add column</h3>
-				<label htmlFor='column-title'>Title</label>
+				<label htmlFor='column-title' className='text-sm'>
+					Title
+				</label>
 				<input
 					type='text'
 					name='column-title'
@@ -69,7 +73,10 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 				/>
 				<button
 					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-0'
-					onClick={() => closeModal()}
+					onClick={() => {
+						closeModal();
+						resetForm();
+					}}
 				>
 					<X size={16} weight='bold' />
 				</button>
