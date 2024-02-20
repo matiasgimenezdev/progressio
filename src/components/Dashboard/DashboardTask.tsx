@@ -16,7 +16,7 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 	const { id, title, description, labels } = task;
 	return (
 		<article
-			className={`p-4 border-2 min-h-[130px] max-w-[300px] rounded-lg relative`}
+			className={`p-4 border-2 min-h-[130px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] rounded-lg relative`}
 			style={{ borderColor: color }}
 		>
 			<h4 className='font-bold'>{title}</h4>

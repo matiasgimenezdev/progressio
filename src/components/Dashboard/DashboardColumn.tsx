@@ -42,7 +42,7 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 
 	const { id, tasks, title, color } = column;
 	return (
-		<section className='min-w-[300px] flex gap-4 flex-col'>
+		<section className='min-w-[300px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] flex gap-4 flex-col'>
 			<header
 				className={`p-2 w-full border-2 rounded-lg mt-2 relative`}
 				style={{ borderColor: color }}
