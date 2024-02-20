@@ -12,7 +12,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
 }) => {
 	return (
 		<header className='z-50 flex items-center bg-primary-color min-h-[80px] text-white w-full fixed'>
-			<h1 className='w-fit pl-4 inline-flex items-center text-[28px]'>
+			<h1 className='min-w-fit pl-4 inline-flex items-center text-[28px]'>
 				<img
 					className='inline-block w-8 h-8'
 					src='icons/grid.svg'
@@ -21,7 +21,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
 				<span className='pl-2 hidden sm:inline-block'>Progressio</span>
 			</h1>
 			{boardName && (
-				<h2 className='inline-block w-full font-medium text-lg text-center group'>
+				<h2 className='inline-block w-full font-medium text-lg text-center pr-12 sm:pr-28 group'>
 					{boardName}
 					<button
 						onClick={() => {
