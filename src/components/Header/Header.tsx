@@ -29,9 +29,9 @@ export const Header: FunctionComponent<HeaderProps> = ({
 						}}
 					>
 						<TrashSimple
-							size={21}
-							className='hover:text-red-600 relative top-1 left-3'
-							weight='regular'
+							size={20}
+							className='hover:text-red-500 relative top-1 left-3'
+							weight='bold'
 						/>
 					</button>
 				</h2>
