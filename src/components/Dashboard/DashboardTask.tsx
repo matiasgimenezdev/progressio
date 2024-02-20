@@ -14,11 +14,11 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 	const { title, description, labels } = task;
 	return (
 		<article
-			className={`p-4 border-2 min-h-[130px] rounded-lg relative`}
+			className={`p-4 border-2 min-h-[130px] max-w-[300px] rounded-lg relative`}
 			style={{ borderColor: color }}
 		>
 			<h4 className='font-bold'>{title}</h4>
-			<p className='text-sm py-2'>{description}</p>
+			<p className='text-sm py-2 max-w-full'>{description}</p>
 			{labels && (
 				<p className='flex gap-2 mt-2'>
 					{labels.map((label) => {
