@@ -1,17 +1,19 @@
 import { FunctionComponent } from 'react';
 import { Task } from '../../types';
-import { DotsSixVertical } from '@phosphor-icons/react';
+import { DotsSixVertical, TrashSimple } from '@phosphor-icons/react';
 
 type DashboardTaskProps = {
 	task: Task;
 	color: string;
+	handleDeleteTask: (taskId: string) => void;
 };
 
 export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 	task,
 	color,
+	handleDeleteTask,
 }) => {
-	const { title, description, labels } = task;
+	const { id, title, description, labels } = task;
 	return (
 		<article
 			className={`p-4 border-2 min-h-[130px] max-w-[300px] rounded-lg relative`}
@@ -41,6 +43,12 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 
 			<button className='absolute right-4 top-4 cursor-grab'>
 				<DotsSixVertical size={18} weight='bold' />
+			</button>
+			<button
+				className='absolute bottom-4 right-4'
+				onClick={() => handleDeleteTask(id)}
+			>
+				<TrashSimple size={18} weight='bold' />
 			</button>
 		</article>
 	);

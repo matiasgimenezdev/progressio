@@ -26,11 +26,11 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 		closeModal();
 	}
 
-	// function handleDeleteTask(taskId: string) {
-	// 	const nextTasks = column.tasks.filter((task) => task.id !== taskId);
-	// 	const nextColumn = { ...column, tasks: nextTasks };
-	// 	handleUpdateColumn(nextColumn);
-	// }
+	function handleDeleteTask(taskId: string) {
+		const nextTasks = column.tasks.filter((task) => task.id !== taskId);
+		const nextColumn = { ...column, tasks: nextTasks };
+		handleUpdateColumn(nextColumn);
+	}
 
 	// function handleUpdateTask(task: Task) {
 	// 	const nextTasks = column.tasks.map((t) =>
@@ -74,6 +74,7 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 							key={task.id}
 							task={task}
 							color={color}
+							handleDeleteTask={handleDeleteTask}
 						/>
 					);
 				})}
