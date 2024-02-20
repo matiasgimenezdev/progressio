@@ -78,8 +78,9 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 					);
 				})}
 			<button
-				className='w-full bg-secondary-color p-2 rounded-lg cursor-pointer hover:brightness-90 flex justify-center items-center gap-2 text-sm'
+				className='w-full p-2 rounded-lg cursor-pointer hover:brightness-90 flex justify-center items-center gap-2 text-sm'
 				onClick={() => showModal()}
+				style={{ backgroundColor: color }}
 			>
 				Create task{' '}
 				<Plus size={16} weight='bold' className='inline-block' />
