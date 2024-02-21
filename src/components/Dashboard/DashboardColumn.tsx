@@ -28,17 +28,20 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 	}
 
 	function handleDeleteTask(taskId: string) {
-		const nextTasks = column.tasks.filter((task) => task.id !== taskId);
+		const nextTasks = column.tasks.filter(
+			(currentTask) => currentTask.id !== taskId
+		);
 		const nextColumn = { ...column, tasks: nextTasks };
 		handleUpdateColumn(nextColumn);
 	}
 
 	function handleUpdateTask(task: Task) {
-		const nextTasks = column.tasks.map((t) =>
-			t.id === task.id ? task : t
+		const nextTasks = column.tasks.map((currentTask) =>
+			currentTask.id === task.id ? task : currentTask
 		);
 		const nextColumn = { ...column, tasks: nextTasks };
 		handleUpdateColumn(nextColumn);
+		setTaskToEdit(null);
 		closeModal();
 	}
 
@@ -94,7 +97,10 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 			</button>
 			<TaskForm
 				showModal={isModalOpen}
-				closeModal={closeModal}
+				closeModal={() => {
+					closeModal();
+					setTaskToEdit(null);
+				}}
 				handleCreateTask={handleCreateTask}
 				handleUpdateTask={handleUpdateTask}
 				taskToEdit={taskToEdit}

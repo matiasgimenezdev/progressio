@@ -37,15 +37,12 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 			const { title, description, labels } = taskToEdit;
 			setTitle(title);
 			setDescription(description);
-			if (labels) {
-				labels?.length > 0 ? setLabels(labels) : setLabels([]);
-			}
+			setLabels(labels || []);
 		}
 	}, [taskToEdit]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-
 		if (!title.trim()) return;
 
 		if (taskToEdit) {
@@ -109,7 +106,6 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 						type='button'
 						className='bg-secondary-color w-fit p-2 px-4 text-sm inline-block ml-4 rounded-md'
 						onClick={() => {
-							console.log(labels.length);
 							if (labels.length === 3) return;
 							if (currentLabel.trim() === '') return;
 							setLabels([...labels, currentLabel.trim()]);
