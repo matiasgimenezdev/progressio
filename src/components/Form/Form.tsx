@@ -12,7 +12,7 @@ export const Form: FunctionComponent<FormProps> = ({
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='relative flex bottom-6 flex-col gap-2 bg-primary-color p-5 text-white rounded-lg sm:p-8 sm:w-[420px] sm:h-75'
+			className='relative flex bottom-6 flex-col gap-2 bg-primary-color p-3 text-white rounded-lg sm:p-8 sm:w-[420px] sm:h-75'
 		>
 			{children}
 		</form>

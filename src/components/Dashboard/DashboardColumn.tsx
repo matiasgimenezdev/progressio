@@ -3,7 +3,7 @@ import { Column, Task } from '../../types/';
 import { X, CaretDown, Plus } from '@phosphor-icons/react';
 import { DashboardTask } from './DashboardTask';
 import { useModal } from '../../hooks';
-import { CreateTaskForm } from '../Form/CreateTaskForm';
+import { TaskForm } from '../Form/TaskForm';
 
 type DashboardColumnProps = {
 	column: Column;
@@ -18,6 +18,7 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 }) => {
 	const [isMinimized, setIsMinimized] = useState<boolean>(false);
 	const [isModalOpen, showModal, closeModal] = useModal();
+	const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
 
 	function handleCreateTask(task: Task) {
 		const nextTasks = [...column.tasks, task];
@@ -32,13 +33,14 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 		handleUpdateColumn(nextColumn);
 	}
 
-	// function handleUpdateTask(task: Task) {
-	// 	const nextTasks = column.tasks.map((t) =>
-	// 		t.id === task.id ? task : t
-	// 	);
-	// 	const nextColumn = { ...column, tasks: nextTasks };
-	// 	handleUpdateColumn(nextColumn);
-	// }
+	function handleUpdateTask(task: Task) {
+		const nextTasks = column.tasks.map((t) =>
+			t.id === task.id ? task : t
+		);
+		const nextColumn = { ...column, tasks: nextTasks };
+		handleUpdateColumn(nextColumn);
+		closeModal();
+	}
 
 	const { id, tasks, title, color } = column;
 	return (
@@ -75,6 +77,10 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 							task={task}
 							color={color}
 							handleDeleteTask={handleDeleteTask}
+							showEditTaskForm={(task: Task) => {
+								setTaskToEdit(task);
+								showModal();
+							}}
 						/>
 					);
 				})}
@@ -86,11 +92,12 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 				Create task{' '}
 				<Plus size={16} weight='bold' className='inline-block' />
 			</button>
-			<CreateTaskForm
+			<TaskForm
 				showModal={isModalOpen}
 				closeModal={closeModal}
 				handleCreateTask={handleCreateTask}
-				handleUpdateTask={() => {}}
+				handleUpdateTask={handleUpdateTask}
+				taskToEdit={taskToEdit}
 			/>
 		</section>
 	);

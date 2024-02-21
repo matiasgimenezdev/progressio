@@ -1,22 +1,24 @@
 import { Modal } from '..';
 import { Form } from './Form';
-import { FunctionComponent, useState } from 'react';
-import { Task } from '../../types/';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { Task } from '../../types';
 import { getUUID } from '../../utils';
 import { X } from '@phosphor-icons/react';
 
 type CreateTaskFormProps = {
 	showModal: boolean;
 	closeModal: () => void;
+	taskToEdit: Task | null;
 	handleCreateTask: (task: Task) => void;
 	handleUpdateTask: (task: Task) => void;
 };
 
-export const CreateTaskForm: FunctionComponent<CreateTaskFormProps> = ({
+export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 	showModal,
 	closeModal,
 	handleCreateTask,
-	// handleUpdateTask,
+	taskToEdit,
+	handleUpdateTask,
 }) => {
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
@@ -30,25 +32,48 @@ export const CreateTaskForm: FunctionComponent<CreateTaskFormProps> = ({
 		setCurrentLabel('');
 	}
 
+	useEffect(() => {
+		if (taskToEdit) {
+			const { title, description, labels } = taskToEdit;
+			setTitle(title);
+			setDescription(description);
+			if (labels) {
+				labels?.length > 0 ? setLabels(labels) : setLabels([]);
+			}
+		}
+	}, [taskToEdit]);
+
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
+
 		if (!title.trim()) return;
-		const newTask: Task = {
-			id: getUUID(),
-			title,
-			description,
-			labels,
-			createdAt: new Date().toISOString(),
-		};
+
+		if (taskToEdit) {
+			const updatedTask: Task = {
+				...taskToEdit,
+				title,
+				description,
+				labels,
+			};
+			handleUpdateTask(updatedTask);
+		} else {
+			const newTask: Task = {
+				id: getUUID(),
+				title,
+				description,
+				labels,
+				createdAt: new Date().toISOString(),
+			};
+			handleCreateTask(newTask);
+		}
 
 		resetForm();
-		handleCreateTask(newTask);
 	}
 
 	return (
 		<Modal isOpen={showModal} closeModal={closeModal}>
 			<Form handleSubmit={handleSubmit}>
-				<h3 className='text-lg font-bold py-2'>Create task</h3>
+				<h3 className='text-lg font-bold py-1'>Create task</h3>
 				<label htmlFor='task-title' className='text-sm'>
 					Title
 				</label>
@@ -98,10 +123,20 @@ export const CreateTaskForm: FunctionComponent<CreateTaskFormProps> = ({
 					{labels.map((label) => (
 						<span
 							key={label}
-							className='text-[10px] text-white p-1 px-3 rounded-xl'
+							className='text-[10px] text-white p-1 px-3 rounded-xl flex items-center gap-1'
 							style={{ backgroundColor: '#4B5563' }}
 						>
 							{label}
+							<button
+								onClick={() => {
+									const nextLabels = labels.filter(
+										(currentLabel) => currentLabel !== label
+									);
+									setLabels(nextLabels);
+								}}
+							>
+								<X size={10} />
+							</button>
 						</span>
 					))}
 				</p>
@@ -121,7 +156,7 @@ export const CreateTaskForm: FunctionComponent<CreateTaskFormProps> = ({
 				<input
 					type='submit'
 					className='font-medium mt-4 bg-secondary-color py-2 rounded-md cursor-pointer hover:brightness-90'
-					value='Create task'
+					value={taskToEdit ? `Update task` : `Create task`}
 				/>
 				<button
 					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-0'
