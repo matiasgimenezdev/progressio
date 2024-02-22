@@ -38,7 +38,7 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 			>
 				{description}
 			</p>
-			{labels && (
+			{
 				<p className='flex gap-2 mt-2'>
 					{labels.map((label) => {
 						const labelText =
@@ -56,7 +56,7 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 						);
 					})}
 				</p>
-			)}
+			}
 
 			<button className='absolute right-4 top-4 cursor-grab'>
 				<DotsSixVertical size={18} weight='bold' />

@@ -37,7 +37,7 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 			const { title, description, labels } = taskToEdit;
 			setTitle(title);
 			setDescription(description);
-			setLabels(labels || []);
+			setLabels(labels);
 		}
 	}, [taskToEdit]);
 
