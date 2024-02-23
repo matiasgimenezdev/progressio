@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Board } from '../../types';
 import { useKeydown, useModal } from '../../hooks';
 import { BoardForm } from '../Form/BoardForm';
@@ -31,7 +31,22 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 	const [isModalOpen, showModal, closeModal] = useModal();
 	const [boardToEdit, setBoardToEdit] = useState<Board | null>(null);
 
+	const menuRef = useRef<HTMLElement | null>(null);
+
 	useKeydown('Escape', () => setIsOpen(false));
+
+	useEffect(() => {
+		const clickEventHandler = (event: MouseEvent) => {
+			if (menuRef.current?.contains(event.target as Node)) return;
+			setIsOpen(false);
+		};
+
+		document.addEventListener('click', clickEventHandler);
+
+		return () => {
+			document.removeEventListener('click', clickEventHandler);
+		};
+	}, []);
 
 	function handleBoardItemClick(board: Board) {
 		if (board.id === currentBoardId) return;
@@ -43,6 +58,7 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 		<RemoveScroll enabled={isOpen}>
 			<FocusLock disabled={!isOpen}>
 				<aside
+					ref={menuRef}
 					className={`fixed h-[calc(100%-80px)] ${
 						isOpen
 							? 'w-[250px] max-w-[250px]'
