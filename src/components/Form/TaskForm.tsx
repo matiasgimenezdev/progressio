@@ -24,12 +24,14 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 	const [description, setDescription] = useState('');
 	const [labels, setLabels] = useState<string[]>([]);
 	const [currentLabel, setCurrentLabel] = useState<string>('');
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	function resetForm() {
 		setTitle('');
 		setLabels([]);
 		setDescription('');
 		setCurrentLabel('');
+		setErrorMessage(null);
 	}
 
 	useEffect(() => {
@@ -43,7 +45,10 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		if (!title.trim()) return;
+		if (!title.trim()) {
+			setErrorMessage("Task title can't be empty");
+			return;
+		}
 
 		if (taskToEdit) {
 			const updatedTask: Task = {
@@ -68,9 +73,15 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 	}
 
 	return (
-		<Modal isOpen={showModal} closeModal={closeModal}>
-			<Form handleSubmit={handleSubmit}>
-				<h3 className='text-lg font-bold py-1'>Create task</h3>
+		<Modal
+			isOpen={showModal}
+			closeModal={() => {
+				closeModal();
+				resetForm();
+			}}
+		>
+			<Form handleSubmit={handleSubmit} errorMessage={errorMessage}>
+				<h3 className='text-lg font-bold'>Create task</h3>
 				<label htmlFor='task-title' className='text-sm'>
 					Title
 				</label>
@@ -106,10 +117,19 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 						type='button'
 						className='bg-secondary-color w-fit p-2 px-4 text-sm inline-block ml-4 rounded-md'
 						onClick={() => {
-							if (labels.length === 3) return;
-							if (currentLabel.trim() === '') return;
+							if (labels.length === 3) {
+								setErrorMessage('Maximum 3 labels allowed');
+								return;
+							}
+
+							if (currentLabel.trim() === '') {
+								setErrorMessage("Label can't be empty");
+								return;
+							}
+
 							setLabels([...labels, currentLabel.trim()]);
 							setCurrentLabel('');
+							setErrorMessage(null);
 						}}
 					>
 						Add label
