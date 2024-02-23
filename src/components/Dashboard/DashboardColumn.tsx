@@ -9,12 +9,14 @@ type DashboardColumnProps = {
 	column: Column;
 	handleRemoveColumn: (columnId: string) => void;
 	handleUpdateColumn: (column: Column) => void;
+	showEditColumnForm: (column: Column) => void;
 };
 
 export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 	column,
 	handleRemoveColumn,
 	handleUpdateColumn,
+	showEditColumnForm,
 }) => {
 	const [isMinimized, setIsMinimized] = useState<boolean>(false);
 	const [isModalOpen, showModal, closeModal] = useModal();
@@ -51,6 +53,7 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 			<header
 				className={`p-2 w-full border-2 rounded-lg mt-2 relative`}
 				style={{ borderColor: color }}
+				onClick={() => showEditColumnForm(column)}
 			>
 				<button
 					className='absolute right-10 top-3'

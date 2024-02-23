@@ -9,40 +9,65 @@ type CreateColumnFormProps = {
 	showModal: boolean;
 	closeModal: () => void;
 	handleAddColumn: (column: Column) => void;
+	handleUpdateColumn: (column: Column) => void;
+	columnToEdit: Column | null;
 };
 
-export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
+export const ColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 	showModal,
 	closeModal,
 	handleAddColumn,
+	handleUpdateColumn,
+	columnToEdit,
 }) => {
 	const [title, setTitle] = useState<string>('');
 	const [color, setColor] = useState<string>('#FFFFFF');
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
 	function resetForm() {
 		setTitle('');
 		setColor('#FFFFFF');
+		setErrorMessage('');
 	}
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		if (title.trim() === '') return;
-		const newColumn = {
-			id: getUUID(),
-			title,
-			color,
-			tasks: [],
-		};
+		if (title.trim() === '') {
+			setErrorMessage("Column title can't be empty");
+			return;
+		}
 
-		handleAddColumn(newColumn);
+		if (columnToEdit) {
+			const updatedColumn: Column = {
+				...columnToEdit,
+				title,
+				color,
+			};
+			handleUpdateColumn(updatedColumn);
+		} else {
+			const newColumn = {
+				id: getUUID(),
+				title,
+				color,
+				tasks: [],
+			};
+
+			handleAddColumn(newColumn);
+		}
 		resetForm();
 		closeModal();
 	}
 
 	return (
-		<Modal isOpen={showModal} closeModal={closeModal}>
-			<Form handleSubmit={handleSubmit}>
-				<h3 className='text-lg font-bold py-2'>Add column</h3>
+		<Modal
+			isOpen={showModal}
+			closeModal={() => {
+				closeModal();
+				resetForm();
+			}}
+		>
+			<Form handleSubmit={handleSubmit} errorMessage={errorMessage}>
+				<h3 className='text-lg font-bold'>Add column</h3>
 				<label htmlFor='column-title' className='text-sm'>
 					Title
 				</label>
@@ -55,7 +80,6 @@ export const CreateColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 					className='bg-transparent border border-white rounded-md p-2 focus:outline-none focus-within:border-2'
 					onChange={(event) => setTitle(event.target.value)}
 					autoComplete='off'
-					required
 				/>
 				<input
 					type='hidden'

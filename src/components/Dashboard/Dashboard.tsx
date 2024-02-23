@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Board, Column } from '../../types';
 import { DashboardColumn } from './DashboardColumn';
-import { CreateColumnForm } from '../Form/CreateColumnForm';
+import { ColumnForm } from '../Form/ColumnForm';
 import { useModal } from '../../hooks';
 
 type DashboardProps = {
@@ -14,6 +14,7 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 	handleUpdateBoard,
 }) => {
 	const [isModalOpen, showModal, closeModal] = useModal();
+	const [columnToEdit, setColumnToEdit] = useState<Column | null>(null);
 
 	function handleRemoveColumn(columnId: string) {
 		const nextColumns = currentBoard?.columns.filter(
@@ -56,6 +57,10 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 							column={column}
 							handleRemoveColumn={handleRemoveColumn}
 							handleUpdateColumn={handleUpdateColumn}
+							showEditColumnForm={(column: Column) => {
+								setColumnToEdit(column);
+								showModal();
+							}}
 						/>
 					);
 				})}
@@ -66,10 +71,12 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 				+ Add column
 			</button>
 
-			<CreateColumnForm
+			<ColumnForm
 				showModal={isModalOpen}
 				closeModal={() => closeModal()}
 				handleAddColumn={handleAddColumn}
+				handleUpdateColumn={handleUpdateColumn}
+				columnToEdit={columnToEdit}
 			/>
 		</main>
 	);
