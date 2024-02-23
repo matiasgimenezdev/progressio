@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getUUID } from '../../utils';
 import { Board } from '../../types';
 import { Form, Modal } from '..';
@@ -8,18 +8,26 @@ import { X } from '@phosphor-icons/react';
 type CreateBoardFormProps = {
 	showModal: boolean;
 	closeModal: () => void;
-	handleCreateBoard: (board: Board) => void;
 	handleBoardItemClick: (board: Board) => void;
+	handleCreateBoard: (board: Board) => void;
+	handleUpdateBoard: (board: Board) => void;
+	boardToEdit: Board | null;
 };
 
-export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
+export const BoardForm: FunctionComponent<CreateBoardFormProps> = ({
 	showModal,
 	closeModal,
 	handleCreateBoard,
+	handleUpdateBoard,
+	boardToEdit,
 	handleBoardItemClick,
 }) => {
 	const [boardName, setBoardName] = useState<string>('');
 	useKeydown('Escape', closeModal);
+
+	useEffect(() => {
+		if (boardToEdit) setBoardName(boardToEdit.name);
+	}, [boardToEdit]);
 
 	function resetForm() {
 		setBoardName('');
@@ -28,15 +36,26 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		if (boardName.trim() === '') return;
-		const newBoard = {
-			id: getUUID(),
-			name:
-				boardName.trim().toLowerCase()[0].toUpperCase() +
-				boardName.trim().slice(1),
-			columns: [],
-		};
-		handleCreateBoard(newBoard);
-		handleBoardItemClick(newBoard);
+		if (boardToEdit) {
+			const updatedBoard = {
+				...boardToEdit,
+				name:
+					boardName.trim().toLowerCase()[0].toUpperCase() +
+					boardName.trim().slice(1),
+			};
+			handleUpdateBoard(updatedBoard);
+			handleBoardItemClick(updatedBoard);
+		} else {
+			const newBoard = {
+				id: getUUID(),
+				name:
+					boardName.trim().toLowerCase()[0].toUpperCase() +
+					boardName.trim().slice(1),
+				columns: [],
+			};
+			handleCreateBoard(newBoard);
+			handleBoardItemClick(newBoard);
+		}
 		resetForm();
 		closeModal();
 	}
@@ -61,7 +80,7 @@ export const CreateBoardForm: FunctionComponent<CreateBoardFormProps> = ({
 				<input
 					type='submit'
 					className='font-medium mt-4 bg-secondary-color py-2 rounded-md cursor-pointer hover:brightness-90'
-					value='Create board'
+					value={boardToEdit ? `Update board` : `Create board`}
 				/>
 				<button
 					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-0'

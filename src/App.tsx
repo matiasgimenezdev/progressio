@@ -103,6 +103,7 @@ function App() {
 				currentBoardId={currentBoard?.id ?? undefined}
 				handleBoardSelect={handleBoardSelect}
 				handleCreateBoard={handleCreateBoard}
+				handleUpdateBoard={handleUpdateBoard}
 			/>
 		</>
 	);

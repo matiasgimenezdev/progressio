@@ -1,8 +1,14 @@
 import { FunctionComponent, useState } from 'react';
 import { Board } from '../../types';
 import { useKeydown, useModal } from '../../hooks';
-import { CreateBoardForm } from '../Form/CreateBoardForm';
-import { CaretDoubleRight, Cube, SignOut, Plus } from '@phosphor-icons/react';
+import { BoardForm } from '../Form/BoardForm';
+import {
+	CaretDoubleRight,
+	Cube,
+	SignOut,
+	Plus,
+	PencilSimple,
+} from '@phosphor-icons/react';
 import FocusLock from 'react-focus-lock';
 import { RemoveScroll } from 'react-remove-scroll';
 
@@ -11,6 +17,7 @@ type BoardSelectorProps = {
 	currentBoardId: string | undefined;
 	handleBoardSelect: (board: Board) => void;
 	handleCreateBoard: (board: Board) => void;
+	handleUpdateBoard: (board: Board) => void;
 };
 
 export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
@@ -18,9 +25,11 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 	currentBoardId,
 	handleBoardSelect,
 	handleCreateBoard,
+	handleUpdateBoard,
 }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isModalOpen, showModal, closeModal] = useModal();
+	const [boardToEdit, setBoardToEdit] = useState<Board | null>(null);
 
 	useKeydown('Escape', () => setIsOpen(false));
 
@@ -92,6 +101,20 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 										>
 											<Cube size={22} weight='light' />
 											{name}
+											{currentBoardId === id && (
+												<button
+													className='absolute right-6 group'
+													onClick={() => {
+														showModal();
+														setBoardToEdit(board);
+													}}
+												>
+													<PencilSimple
+														size={18}
+														className='group-hover:text-yellow-500'
+													/>
+												</button>
+											)}
 										</li>
 									);
 								})
@@ -132,11 +155,16 @@ export const BoardSelector: FunctionComponent<BoardSelectorProps> = ({
 						</button>
 					</nav>
 				</aside>
-				<CreateBoardForm
+				<BoardForm
 					showModal={isModalOpen}
-					closeModal={closeModal}
+					closeModal={() => {
+						closeModal();
+						setBoardToEdit(null);
+					}}
 					handleBoardItemClick={handleBoardItemClick}
 					handleCreateBoard={handleCreateBoard}
+					handleUpdateBoard={handleUpdateBoard}
+					boardToEdit={boardToEdit}
 				/>
 			</FocusLock>
 		</RemoveScroll>
