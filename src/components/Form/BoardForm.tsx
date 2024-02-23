@@ -23,7 +23,12 @@ export const BoardForm: FunctionComponent<CreateBoardFormProps> = ({
 	handleBoardItemClick,
 }) => {
 	const [boardName, setBoardName] = useState<string>('');
-	useKeydown('Escape', closeModal);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+	useKeydown('Escape', () => {
+		setErrorMessage(null);
+		closeModal();
+	});
 
 	useEffect(() => {
 		if (boardToEdit) setBoardName(boardToEdit.name);
@@ -31,11 +36,16 @@ export const BoardForm: FunctionComponent<CreateBoardFormProps> = ({
 
 	function resetForm() {
 		setBoardName('');
+		setErrorMessage(null);
 	}
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		if (boardName.trim() === '') return;
+		if (boardName.trim() === '') {
+			setErrorMessage("Board name can't be empty");
+			return;
+		}
+
 		if (boardToEdit) {
 			const updatedBoard = {
 				...boardToEdit,
@@ -61,9 +71,15 @@ export const BoardForm: FunctionComponent<CreateBoardFormProps> = ({
 	}
 
 	return (
-		<Modal isOpen={showModal} closeModal={closeModal}>
-			<Form handleSubmit={handleSubmit}>
-				<h3 className='text-lg font-bold py-2'>Create board</h3>
+		<Modal
+			isOpen={showModal}
+			closeModal={() => {
+				closeModal();
+				resetForm();
+			}}
+		>
+			<Form handleSubmit={handleSubmit} errorMessage={errorMessage}>
+				<h3 className='text-lg font-bold pb-2'>Create board</h3>
 				<label htmlFor='board-name' className='text-sm'>
 					Name
 				</label>
