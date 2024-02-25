@@ -65,7 +65,7 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 					);
 				})}
 			<button
-				className={`min-w-[132px] h-fit border-2 border-white bg-transparent text-white rounded-lg text-sm p-3 cursor-pointer hover:brightness-90 sm:mt-3`}
+				className={`min-w-[132px] min-w-[300px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] h-fit border-2 border-white bg-transparent text-white rounded-lg text-sm p-3 cursor-pointer hover:brightness-90 sm:mt-3`}
 				onClick={() => showModal()}
 			>
 				+ Add column
