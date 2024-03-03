@@ -101,7 +101,7 @@ export const ColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 				<input
 					type='submit'
 					className='font-medium mt-4 bg-secondary-color py-2 rounded-md cursor-pointer hover:brightness-90'
-					value='Add column'
+					value={columnToEdit ? `Update column` : `Create column`}
 				/>
 				<button
 					className='font-medium rounded-full hover:bg-white hover:bg-opacity-15 transition-colors duration-150 p-1 absolute top-4 right-0'
