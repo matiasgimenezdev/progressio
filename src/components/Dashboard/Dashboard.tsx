@@ -59,7 +59,6 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 							handleUpdateColumn={handleUpdateColumn}
 							showEditColumnForm={(column: Column) => {
 								setColumnToEdit(column);
-								console.log(column);
 								showModal();
 							}}
 						/>
