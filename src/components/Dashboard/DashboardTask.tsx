@@ -39,8 +39,6 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 			className={`p-4 border-2 min-h-[130px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] rounded-lg relative`}
 			style={{ borderColor: color, ...style }}
 			ref={setNodeRef}
-			{...listeners}
-			{...attributes}
 		>
 			<h4
 				className='font-bold cursor-pointer'
@@ -74,7 +72,11 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 				</p>
 			}
 
-			<button className='absolute right-4 top-4 cursor-grab'>
+			<button
+				className='absolute right-4 top-4 cursor-grab'
+				{...listeners}
+				{...attributes}
+			>
 				<DotsSixVertical size={18} weight='bold' />
 			</button>
 			<button
