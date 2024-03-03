@@ -85,9 +85,8 @@ function App() {
 
 	function handleDragEnd(event: DragEndEvent) {
 		const { active, over } = event;
-		if (!over) return;
-
 		let draggedTask: Task | null;
+		if (!over) return;
 		currentBoard?.columns.forEach((column) => {
 			column.tasks.forEach((task) => {
 				if (task.id === active.id) {
@@ -106,6 +105,9 @@ function App() {
 
 			if (column.id === over.id) {
 				if (!draggedTask) return column;
+				if (column.tasks.some((task) => task.id === draggedTask?.id))
+					return column;
+
 				return { ...column, tasks: [...column.tasks, draggedTask] };
 			}
 		});
