@@ -2,54 +2,57 @@ import { useState } from 'react';
 import { Dashboard, Header, BoardSelector } from './components';
 import { Board, Task } from './types';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { getUUID } from './utils';
 
 function App() {
 	const [userBoards, setUserBoards] = useState<Board[]>([
 		{
 			id: '1',
-			name: 'Board 1',
+			name: 'My board',
 			columns: [
 				{
-					id: '1',
-					title: 'Column 1',
-					color: '#4404ac',
+					id: getUUID(),
+					title: 'To Do',
+					color: '#9564e4',
 					tasks: [
 						{
-							id: '1-1',
-							title: 'Task 1',
-							description: 'Description 1',
-							labels: [],
+							id: getUUID(),
+							title: 'Edit "About" page',
+							description:
+								'Add new team members and update contact information',
+							labels: ['Frontend'],
 							createdAt: '2021-01-01',
 						},
 					],
 				},
 				{
-					id: '2',
-					title: 'Column 2',
+					id: getUUID(),
+					title: 'In progress',
 					color: '#f72585',
 					tasks: [
 						{
-							id: '2-1',
-							title: 'Task 1',
-							description: 'Description 1',
-							labels: ['Label 1', 'Label 2'],
+							id: getUUID(),
+							title: 'Fix issues with payment gateway',
+							description: 'Payments are not being processed',
+							labels: ['Urgent'],
 							createdAt: '2021-01-01',
 						},
 						{
-							id: '2-2',
-							title: 'Task 2',
-							description: 'Description 2',
+							id: getUUID(),
+							title: 'Update pricing page',
+							description: 'Add new plans and update pricing',
 							labels: [],
 							createdAt: '2021-01-01',
 						},
 					],
 				},
+				{
+					id: getUUID(),
+					title: 'Done',
+					color: '#4e9c66',
+					tasks: [],
+				},
 			],
-		},
-		{
-			id: '2',
-			name: 'Board 2',
-			columns: [],
 		},
 	]);
 
