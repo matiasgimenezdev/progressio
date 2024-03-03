@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getUUID } from '../../utils';
 import { Column } from '../../types';
 import { Form, Modal } from '..';
@@ -29,6 +29,14 @@ export const ColumnForm: FunctionComponent<CreateColumnFormProps> = ({
 		setColor('#FFFFFF');
 		setErrorMessage('');
 	}
+
+	useEffect(() => {
+		if (columnToEdit) {
+			const { title, color } = columnToEdit;
+			setTitle(title);
+			setColor(color);
+		}
+	}, [columnToEdit]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
