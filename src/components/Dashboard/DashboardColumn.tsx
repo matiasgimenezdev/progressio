@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { Column, Task } from '../../types/';
-import { X, CaretDown, Plus } from '@phosphor-icons/react';
+import { X, Plus, PencilSimple } from '@phosphor-icons/react';
 import { DashboardTask } from './DashboardTask';
 import { useModal } from '../../hooks';
 import { TaskForm } from '../Form/TaskForm';
@@ -63,26 +63,30 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 				style={{ borderColor: color }}
 				onClick={() => setIsMinimized(!isMinimized)}
 			>
-				<button
-					className='absolute right-10 top-3'
-					onClick={() => showEditColumnForm(column)}
-				>
-					<CaretDown
-						size={18}
-						weight='bold'
-						className={!isMinimized ? 'rotate-180' : 'rotate-0'}
-					/>
-				</button>
 				<h3 style={{ color: color }} className='font-bold text-lg'>
 					{title.toUpperCase()}
 				</h3>
 				<button
-					className='absolute right-3 top-3'
+					className='absolute right-10 top-3 group'
+					onClick={() => showEditColumnForm(column)}
+				>
+					<PencilSimple
+						size={18}
+						weight='bold'
+						className='group-hover:text-gray-300'
+					/>
+				</button>
+				<button
+					className='absolute right-3 top-3 group'
 					onClick={() => {
 						handleRemoveColumn(id);
 					}}
 				>
-					<X size={18} weight='bold' />
+					<X
+						size={18}
+						weight='bold'
+						className='group-hover:text-red-500'
+					/>
 				</button>
 			</header>
 			{!isMinimized &&

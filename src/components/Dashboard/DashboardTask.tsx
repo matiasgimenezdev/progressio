@@ -96,7 +96,7 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 				<PencilSimple
 					size={18}
 					weight='bold'
-					className='group-hover:text-yellow-500'
+					className='group-hover:text-gray-300'
 				/>
 			</button>
 		</article>
