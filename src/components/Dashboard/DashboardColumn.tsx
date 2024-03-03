@@ -59,7 +59,7 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 			} p-2 rounded-lg mt-2 relative`}
 		>
 			<header
-				className={`p-2 w-full border-2 rounded-lg mt-2 relative`}
+				className={`p-2 w-full border-2 rounded-lg mt-2 relative cursor-pointer`}
 				style={{ borderColor: color }}
 				onClick={() => setIsMinimized(!isMinimized)}
 			>
