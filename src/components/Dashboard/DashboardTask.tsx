@@ -47,7 +47,7 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 				{title}
 			</h4>
 			<p
-				className='text-sm py-2 max-w-full cursor-pointer'
+				className='text-sm py-2 max-w-[calc(100%-25px)] cursor-pointer'
 				onClick={() => showEditTaskForm(task)}
 			>
 				{description}
