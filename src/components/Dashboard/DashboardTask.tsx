@@ -5,6 +5,7 @@ import {
 	TrashSimple,
 	PencilSimple,
 } from '@phosphor-icons/react';
+import { useDraggable } from '@dnd-kit/core';
 
 type DashboardTaskProps = {
 	task: Task;
@@ -19,12 +20,27 @@ export const DashboardTask: FunctionComponent<DashboardTaskProps> = ({
 	handleDeleteTask,
 	showEditTaskForm,
 }) => {
+	const { attributes, listeners, setNodeRef, transform } = useDraggable({
+		id: `${task.id}`,
+	});
+
+	const dragging = {
+		transform: `translate3d(${transform?.x}px, ${transform?.y}px, 0)`,
+		backgroundColor: '#000',
+		zIndex: 1000,
+	};
+
+	const style = transform ? dragging : undefined;
+
 	const { id, title, description, labels } = task;
 
 	return (
 		<article
 			className={`p-4 border-2 min-h-[130px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] rounded-lg relative`}
-			style={{ borderColor: color }}
+			style={{ borderColor: color, ...style }}
+			ref={setNodeRef}
+			{...listeners}
+			{...attributes}
 		>
 			<h4
 				className='font-bold cursor-pointer'

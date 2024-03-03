@@ -48,7 +48,7 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 	}
 
 	return (
-		<main className='flex flex-col md:flex-row gap-8 min-w-fit w-full pl-[60px] min-h-full h-auto p-8 pt-[85px] bg-background-color text-white'>
+		<main className='flex flex-col md:flex-row gap-4 min-w-fit w-full pl-[60px] min-h-full h-auto p-8 pt-[85px] bg-background-color text-white md:grap-8'>
 			{currentBoard.columns &&
 				currentBoard.columns.map((column) => {
 					return (
@@ -59,13 +59,14 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 							handleUpdateColumn={handleUpdateColumn}
 							showEditColumnForm={(column: Column) => {
 								setColumnToEdit(column);
+								console.log(column);
 								showModal();
 							}}
 						/>
 					);
 				})}
 			<button
-				className={`min-w-[300px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] h-fit border-2 border-white bg-transparent text-white rounded-lg text-sm p-3 cursor-pointer hover:brightness-90 sm:mt-3`}
+				className={`min-w-[150px] mt-0 max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] md:mt-6 h-fit border-2 border-white bg-transparent text-white rounded-lg text-sm p-3 cursor-pointer hover:brightness-90`}
 				onClick={() => showModal()}
 			>
 				+ Add column

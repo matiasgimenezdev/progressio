@@ -4,6 +4,7 @@ import { X, CaretDown, Plus } from '@phosphor-icons/react';
 import { DashboardTask } from './DashboardTask';
 import { useModal } from '../../hooks';
 import { TaskForm } from '../Form/TaskForm';
+import { useDroppable } from '@dnd-kit/core';
 
 type DashboardColumnProps = {
 	column: Column;
@@ -21,6 +22,8 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 	const [isMinimized, setIsMinimized] = useState<boolean>(false);
 	const [isModalOpen, showModal, closeModal] = useModal();
 	const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
+
+	const { isOver, setNodeRef } = useDroppable({ id: column.id });
 
 	function handleCreateTask(task: Task) {
 		const nextTasks = [...column.tasks, task];
@@ -49,15 +52,20 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 
 	const { id, tasks, title, color } = column;
 	return (
-		<section className='min-w-[300px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] flex gap-4 flex-col'>
+		<section
+			ref={setNodeRef}
+			className={`min-w-[300px] max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] flex gap-4 flex-col ${
+				isOver && `bg-gray-800`
+			} p-2 rounded-lg mt-2 relative`}
+		>
 			<header
 				className={`p-2 w-full border-2 rounded-lg mt-2 relative`}
 				style={{ borderColor: color }}
-				onClick={() => showEditColumnForm(column)}
+				onClick={() => setIsMinimized(!isMinimized)}
 			>
 				<button
 					className='absolute right-10 top-3'
-					onClick={() => setIsMinimized(!isMinimized)}
+					onClick={() => showEditColumnForm(column)}
 				>
 					<CaretDown
 						size={18}
@@ -70,7 +78,9 @@ export const DashboardColumn: FunctionComponent<DashboardColumnProps> = ({
 				</h3>
 				<button
 					className='absolute right-3 top-3'
-					onClick={() => handleRemoveColumn(id)}
+					onClick={() => {
+						handleRemoveColumn(id);
+					}}
 				>
 					<X size={18} weight='bold' />
 				</button>
