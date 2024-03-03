@@ -65,7 +65,9 @@ export const Dashboard: FunctionComponent<DashboardProps> = ({
 					);
 				})}
 			<button
-				className={`min-w-[150px] mt-0 max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px] md:mt-6 h-fit border-2 border-white bg-transparent text-white rounded-lg text-sm p-3 cursor-pointer hover:brightness-90`}
+				className={`min-w-[150px] ${
+					currentBoard.columns.length > 0 ? 'mt-0 md:mt-6' : 'mt-2'
+				} max-w-[min(400px,100vw)] sm:max-w-[min(550px,100vw)] md:max-w-[300px]  h-fit border-2 border-white bg-transparent text-white rounded-lg text-sm p-3 cursor-pointer hover:brightness-90`}
 				onClick={() => showModal()}
 			>
 				+ Add column
