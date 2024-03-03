@@ -165,7 +165,7 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 					name='task-description'
 					cols={30}
 					rows={4}
-					maxLength={120}
+					maxLength={60}
 					value={description}
 					onChange={(event) => setDescription(event.target.value)}
 				/>
