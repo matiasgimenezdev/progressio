@@ -6,10 +6,10 @@ Progressio
 
 <p> Progressio is crafted to empower you in organizing, visualizing, and managing your tasks efficiently through the widely acclaimed Kanban methodology. It enables you to streamline your workflow, fostering productivity and enhancing collaboration.</p>
 
+#### [Demo](https://progressio.vercel.app/)
+
 ## Build with
 
 -   [React.js](https://react.dev/)
 -   Estilos - [TailwindCSS 3.3.1](https://tailwindcss.com/docs/installation)
 -   Build tool - [Vite](https://vitejs.dev/)
-
-#### [Demo:](https://matiasgimenez.vercel.app/)
