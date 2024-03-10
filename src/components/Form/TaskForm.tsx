@@ -98,7 +98,7 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 				<label htmlFor='task-label' className='text-sm'>
 					Labels{' '}
 					<span className='inline-block ml-1 text-xs text-gray-400'>
-						(max. 3)
+						(max. 2)
 					</span>
 				</label>
 				<p>
@@ -107,6 +107,7 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 						id='task-label'
 						name='task-label'
 						value={currentLabel}
+						maxLength={12}
 						className='bg-transparent border border-white rounded-md w-3/5 p-2 focus:outline-none focus-within:border-2'
 						onChange={(event) =>
 							setCurrentLabel(event.target.value)
@@ -117,8 +118,11 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 						type='button'
 						className='bg-secondary-color w-fit p-2 px-4 text-sm inline-block ml-4 rounded-md'
 						onClick={() => {
-							if (labels.length === 3) {
-								setErrorMessage('Maximum 3 labels allowed');
+							if (
+								labels.length === 2 ||
+								taskToEdit?.labels.length === 2
+							) {
+								setErrorMessage('Maximum 2 labels allowed');
 								return;
 							}
 
@@ -145,10 +149,20 @@ export const TaskForm: FunctionComponent<CreateTaskFormProps> = ({
 							{label}
 							<button
 								onClick={() => {
-									const nextLabels = labels.filter(
-										(currentLabel) => currentLabel !== label
-									);
-									setLabels(nextLabels);
+									if (taskToEdit) {
+										const nextLabels =
+											taskToEdit.labels.filter(
+												(currentLabel) =>
+													currentLabel !== label
+											);
+										setLabels(nextLabels);
+									} else {
+										const nextLabels = labels.filter(
+											(currentLabel) =>
+												currentLabel !== label
+										);
+										setLabels(nextLabels);
+									}
 								}}
 							>
 								<X size={10} />
